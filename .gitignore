@@ -174,3 +174,15 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+
+# ignora arquivos temporários mas mantém estrutura
+data/*.tmp
+data/**/*.tmp
+!data/
+
+# Ignore arquivos de credenciais e secrets
+secrets/*.json
+.env
+
+data/*
