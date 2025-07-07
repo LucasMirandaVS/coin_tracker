@@ -62,7 +62,7 @@ docker compose up --build
 
 ---
 
-## 💸 GCP Costs (approximate)
+## GCP Costs (approximate)
 - **BigQuery storage**: First 10 GB free, then $0.02/GB/month
 - **BigQuery queries**: 1 TB free/month, then $5/TB
 - **Cloud Run job**: Charged only while running (first 2 million requests free/month)
@@ -70,7 +70,7 @@ docker compose up --build
 
 ---
 
-## ✅ Future Improvements
+## Future Improvements
 - Enable logging and alerting
 - Validate schema before upload
 - Connect to Looker Studio (ex-Google Data Studio)
