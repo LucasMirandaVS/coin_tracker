@@ -1,6 +1,12 @@
 # Crypto Data Pipeline
 
-A lightweight and containerized pipeline for collecting historical data from cryptocurrencies and uploading it to Google BigQuery.
+A lightweight and containerized pipeline for collecting historical cryptocurrency data and uploading it to Google BigQuery.
+
+This project was built using **Google BigQuery** for scalable data storage and analytics, **Cloud Run** to deploy the containerized pipeline, and **Cloud Scheduler** to automate its execution on a monthly basis. The entire workflow is orchestrated using **Docker** for easy packaging and reproducibility.
+
+The final report is visualized in a dynamic dashboard built with **Looker Studio**, available at:
+
+🔗 [View Dashboard](https://lookerstudio.google.com/reporting/45d260d1-7c90-4712-832d-ce907618e626/page/FSZQF/edit)
 
 ## Project Structure
 
