@@ -184,5 +184,3 @@ data/**/*.tmp
 # Ignore arquivos de credenciais e secrets
 secrets/*.json
 .env
-
-data/*
