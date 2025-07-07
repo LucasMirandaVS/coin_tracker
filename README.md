@@ -11,9 +11,6 @@ crypto_data_pipeline/
 │       ├── bitcoin.csv
 │       ├── ethereum.csv
 │       └── ...
-├── docker/                  # Docker and Docker Compose setup
-│   ├── Dockerfile
-│   └── docker-compose.yml
 ├── scripts/                 # Python modules
 │   ├── __init__.py
 │   ├── load_all_csvs.py
@@ -23,7 +20,9 @@ crypto_data_pipeline/
 ├── .gitignore
 ├── pipeline_executor.py     # Pipeline entrypoint
 ├── requirements.txt
-└── README.md                # Documentation
+└── README.md                # Documentation4
+├── Dockerfile # Docker and Docker Compose setup
+└── docker-compose.yml
 ```
 
 ---
