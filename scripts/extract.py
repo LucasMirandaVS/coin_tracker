@@ -2,6 +2,13 @@ import requests
 import pandas as pd
 from datetime import datetime
 import time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+COINGECKO_API_KEY = os.getenv("COINGECKO_API_KEY")
+
 
 # Lista das moedas que você escolheu
 COINS = ['bitcoin', 'ethereum', 'solana', 'binancecoin', 'ripple']
