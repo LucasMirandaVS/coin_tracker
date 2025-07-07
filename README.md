@@ -2,7 +2,7 @@
 
 A lightweight and containerized pipeline for collecting historical cryptocurrency data and uploading it to Google BigQuery.
 
-This project was built using **Google BigQuery** for scalable data storage and analytics, **Cloud Run** to deploy the containerized pipeline, and **Cloud Scheduler** to automate its execution on a monthly basis. The entire workflow is orchestrated using **Docker** for easy packaging and reproducibility.
+This project was built using **Google BigQuery** for scalable data storage and analytics, **Cloud Run** to deploy the containerized pipeline, and **Cloud Scheduler** to automate its execution on a weekly basis. The entire workflow is orchestrated using **Docker** for easy packaging and reproducibility.
 
 The final report is visualized in a dynamic dashboard built with **Looker Studio**, available at:
 
