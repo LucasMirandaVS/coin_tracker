@@ -20,8 +20,8 @@ crypto_data_pipeline/
 ├── .gitignore
 ├── pipeline_executor.py     # Pipeline entrypoint
 ├── requirements.txt
-└── README.md                # Documentation4
-├── Dockerfile # Docker and Docker Compose setup
+└── README.md                # Documentation
+├── Dockerfile               # Docker and Docker Compose setup
 └── docker-compose.yml
 ```
 
