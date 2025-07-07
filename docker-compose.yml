@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  crypto_pipeline:
+    build: .
+    container_name: crypto_pipeline
+    volumes:
+      - .:/app
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/projeto-estudando-gcp-42d17426c4e1.json
+    command: python pipeline_executor.py
