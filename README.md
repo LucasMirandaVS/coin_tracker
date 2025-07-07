@@ -24,7 +24,7 @@ crypto_data_pipeline/
 ├── secrets/                 # GCP credentials (excluded from version control)
 │   └── project-credentials.json
 ├── .gitignore
-├── pipeline_executor.py     # Pipeline entrypoint
+├── main.py                  # Pipeline entrypoint
 ├── requirements.txt
 └── README.md                # Documentation
 ├── Dockerfile               # Docker and Docker Compose setup
