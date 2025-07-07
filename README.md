@@ -79,5 +79,4 @@ docker compose up --build
 ## Future Improvements
 - Enable logging and alerting
 - Validate schema before upload
-- Connect to Looker Studio (ex-Google Data Studio)
 - Parametrize coin list or add CLI options
