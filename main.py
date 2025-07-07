@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from flask import Flask, request
 from google.cloud import bigquery
 from scripts.load_all_csvs import load_all_csvs
 
@@ -34,5 +35,16 @@ def run_pipeline():
 
     print(f"Dados carregados com sucesso: {len(df)} linhas inseridas.")
 
-if __name__ == "__main__":
+# Cria o app Flask para rodar no Cloud Run
+app = Flask(__name__)
+
+@app.route("/", methods=["POST"])
+def trigger_pipeline():
     run_pipeline()
+    return "Pipeline executado com sucesso!", 200
+
+if __name__ == "__main__":
+    if os.environ.get("PORT") == "8080":
+        app.run(host="0.0.0.0", port=8080)
+    else:
+        run_pipeline()

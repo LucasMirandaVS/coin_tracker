@@ -1,7 +1,10 @@
+blinker==1.9.0
 cachetools==5.5.2
 certifi==2025.6.15
 charset-normalizer==3.4.2
+click==8.2.1
 colorama==0.4.6
+Flask==3.1.1
 google-api-core==2.25.1
 google-auth==2.40.3
 google-cloud-bigquery==3.34.0
@@ -13,6 +16,9 @@ grpcio==1.73.1
 grpcio-status==1.73.1
 idna==3.10
 iniconfig==2.1.0
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.2
 numpy==2.3.1
 packaging==25.0
 pandas==2.3.0
@@ -32,3 +38,4 @@ rsa==4.9.1
 six==1.17.0
 tzdata==2025.2
 urllib3==2.5.0
+Werkzeug==3.1.3

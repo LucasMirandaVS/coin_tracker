@@ -14,5 +14,5 @@ RUN pip install --upgrade pip \
 # Define a variável de ambiente com o caminho da credencial
 ENV GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/projeto-estudando-gcp-42d17426c4e1.json
 
-# Comando padrão para executar a pipeline
-CMD ["python", "pipeline_executor.py"]
+# Comando padrão para executar a aplicação Flask via main.py
+CMD ["python", "main.py"]
