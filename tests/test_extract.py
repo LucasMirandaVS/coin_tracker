@@ -1,11 +1,8 @@
-from scripts.extract import extract_historical_data
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import pytest
+from scripts.extract import extract_all_coins
 
-def test_extract_historical_data_returns_dataframe():
-    df = extract_historical_data('bitcoin', days='1')
-    assert df is not None
-    assert not df.empty
-    assert 'coin' in df.columns
-    assert 'price_usd' in df.columns
+
+def test_extract_all_coins_returns_dataframe():
+    df = extract_all_coins(vs_currency="usd", days="1")
+    assert not df.empty, "O DataFrame retornado está vazio."
+    assert set(["coin", "date", "price_usd", "market_cap_usd", "volume_24h_usd"]).issubset(df.columns)
