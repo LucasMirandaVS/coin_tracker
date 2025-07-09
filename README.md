@@ -12,15 +12,9 @@ The final report is visualized in a dynamic dashboard built with **Looker Studio
 
 ```
 crypto_data_pipeline/
-├── data/                     # CSV files organized by month and coin
-│   └── 2025-07/
-│       ├── bitcoin.csv
-│       ├── ethereum.csv
-│       └── ...
 ├── scripts/                 # Python modules
 │   ├── __init__.py
-│   ├── load_all_csvs.py
-│   └── upload_to_bigquery.py
+│   ├── ...
 ├── secrets/                 # GCP credentials (excluded from version control)
 │   └── project-credentials.json
 ├── .gitignore
