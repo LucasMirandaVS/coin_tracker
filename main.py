@@ -1,50 +1,33 @@
-import os
-from dotenv import load_dotenv
-from flask import Flask, request
-from google.cloud import bigquery
-from scripts.load_all_csvs import load_all_csvs
+from scripts.extract import extract_all_coins
+from scripts.validate import save_partitioned_csvs
+from scripts.upload_to_gcs import upload_folder_to_gcs
 
-# Carrega variáveis de ambiente
-load_dotenv()
-
-# Define variáveis do projeto
-PROJECT_ID = "projeto-estudando-gcp"
-DATASET_ID = "crypto_dataset"
-TABLE_ID = "moedas_particionadas"
-
-# Configura caminho da credencial (usando .env)
-credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
+BUCKET_NAME = "projeto-estudando-gcp_cloudbuild"
+GCS_FOLDER = "crypto_data"
+LOCAL_OUTPUT_DIR = "data"
 
 def run_pipeline():
-    print("Lendo arquivos CSV particionados...")
-    df = load_all_csvs("data")
-    print(f"Total de registros unificados: {len(df)}")
+    # 1. Extrair dados da API da CoinGecko (últimos 60 dias)
+    print("Extraindo dados da API CoinGecko...")
+    df = extract_all_coins(vs_currency='usd', days='60')
 
-    print("Subindo dados para o BigQuery...")
-    client = bigquery.Client(project=PROJECT_ID)
+    if df.empty:
+        print(" Nenhum dado extraído. Encerrando pipeline.")
+        return
 
-    table_ref = f"{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}"
-    job_config = bigquery.LoadJobConfig(
-        write_disposition="WRITE_TRUNCATE",
-        time_partitioning=bigquery.TimePartitioning(field="date"),
+    # 2. Validar e particionar os dados localmente
+    print(" Salvando arquivos particionados localmente...")
+    save_partitioned_csvs(df, output_dir=LOCAL_OUTPUT_DIR)
+
+    # 3. Enviar os arquivos particionados para o bucket no GCS
+    print("Fazendo upload para o Google Cloud Storage...")
+    upload_folder_to_gcs(
+        bucket_name=BUCKET_NAME,
+        local_folder=LOCAL_OUTPUT_DIR,
+        gcs_folder=GCS_FOLDER
     )
 
-    job = client.load_table_from_dataframe(df, table_ref, job_config=job_config)
-    job.result()
-
-    print(f"Dados carregados com sucesso: {len(df)} linhas inseridas.")
-
-# Cria o app Flask para rodar no Cloud Run
-app = Flask(__name__)
-
-@app.route("/", methods=["POST"])
-def trigger_pipeline():
-    run_pipeline()
-    return "Pipeline executado com sucesso!", 200
+    print("Pipeline finalizado com sucesso!")
 
 if __name__ == "__main__":
-    if os.environ.get("PORT") == "8080":
-        app.run(host="0.0.0.0", port=8080)
-    else:
-        run_pipeline()
+    run_pipeline()

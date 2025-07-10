@@ -1,11 +1,13 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  crypto_pipeline:
-    build: .
-    container_name: crypto_pipeline
+  crypto-etl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto-etl
     volumes:
-      - .:/app
+      - ./secrets:/app/secrets
     environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/projeto-estudando-gcp-42d17426c4e1.json
-    command: python pipeline_executor.py
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/projeto-estudando-gcp-4617dc946a75.json
+    command: python main.py

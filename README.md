@@ -2,11 +2,22 @@
 
 A lightweight and containerized pipeline for collecting historical cryptocurrency data and uploading it to Google BigQuery.
 
-This project was built using **Google BigQuery** for scalable data storage and analytics, **Cloud Run** to deploy the containerized pipeline, and **Cloud Scheduler** to automate its execution on a weekly basis. The entire workflow is orchestrated using **Docker** for easy packaging and reproducibility.
+This project was built using **Google Cloud Platform** tools such as:
+
+- **Google BigQuery** for scalable data storage and analytics
+- **Cloud Storage** to stage partitioned CSVs
+- **Cloud Run Jobs** to run the pipeline in a serverless container
+- **Artifact Registry** to host the container image
+- **Cloud Scheduler** to trigger the job weekly
+- **Looker Studio** to build an interactive dashboard for data visualization
+
+The entire workflow is orchestrated using **Docker** for easy packaging and reproducibility.
 
 The final report is visualized in a dynamic dashboard built with **Looker Studio**, available at:
 
 🔗 [View Dashboard](https://lookerstudio.google.com/reporting/45d260d1-7c90-4712-832d-ce907618e626/page/FSZQF/edit)
+
+---
 
 ## Project Structure
 
@@ -14,29 +25,52 @@ The final report is visualized in a dynamic dashboard built with **Looker Studio
 crypto_data_pipeline/
 ├── scripts/                 # Python modules
 │   ├── __init__.py
-│   ├── ...
+│   ├── extract.py           # CoinGecko API logic
+│   ├── transform.py         # Partitioning and formatting
+│   ├── upload_to_gcs.py     # Uploads files to Cloud Storage
 ├── secrets/                 # GCP credentials (excluded from version control)
 │   └── project-credentials.json
 ├── .gitignore
 ├── main.py                  # Pipeline entrypoint
 ├── requirements.txt
-└── README.md                # Documentation
-├── Dockerfile               # Docker and Docker Compose setup
-└── docker-compose.yml
+├── README.md                # Documentation
+├── Dockerfile               # Docker setup
+└── docker-compose.yml       # Local orchestration
+```
+
+---
+
+## Data Flow Architecture
+
+```mermaid
+graph TD;
+    Scheduler["Cloud Scheduler<br>(weekly on Tuesday)"]
+    RunJob["Cloud Run Job<br>(containerized script)"]
+    API["CoinGecko API"]
+    GCS["Cloud Storage<br>(partitioned CSVs)"]
+    BigQuery["BigQuery Table<br>(external)"]
+    Looker["Looker Studio<br>(dashboard)"]
+
+    Scheduler --> RunJob
+    RunJob --> API
+    RunJob --> GCS
+    GCS --> BigQuery
+    BigQuery --> Looker
 ```
 
 ---
 
 ## What the pipeline does
 
-1. Loads all CSVs from the `data/` folder (recursively)
-2. Concatenates the data into a unified DataFrame
-3. Uploads the data to a partitioned table in BigQuery
-4. Data is displayed in a dashboard in Looker Studio
+1. Extracts historical price data from CoinGecko for predefined coins
+2. Saves partitioned `.csv` files locally by year/month
+3. Uploads the partitioned files to a GCS bucket
+4. A BigQuery external table reads all CSVs from the bucket
+5. Dashboard in Looker Studio visualizes the data
 
 ---
 
-##  How to Run Locally
+## How to Run Locally
 
 ### Requirements:
 - Python 3.12+
@@ -51,9 +85,8 @@ GOOGLE_APPLICATION_CREDENTIALS=secrets/project-credentials.json
 COINGECKO_API_KEY=insertyourapikeyhere
 ```
 
-## Run with Docker
+### Run with Docker
 
-### Build and run
 ```bash
 docker compose up --build
 ```
@@ -67,6 +100,9 @@ docker compose up --build
 - **BigQuery queries**: 1 TB free/month, then $5/TB
 - **Cloud Run job**: Charged only while running (first 2 million requests free/month)
 - **Cloud Scheduler**: Free up to 3 jobs/month
+- **Cloud Storage**: First 5 GB free, then ~$0.026/GB/month
+- **Artifact Registry**: Small cost based on usage, free tier available
+- **Looker Studio**: Free (with quotas for BigQuery usage)
 
 ---
 
