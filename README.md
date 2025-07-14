@@ -1,4 +1,4 @@
-# Crypto Data Pipeline
+# Crypto Data Pipeline | Crypto Coin Tracker
 
 A lightweight and containerized pipeline for collecting historical cryptocurrency data and uploading it to Google BigQuery.
 
@@ -15,7 +15,7 @@ The entire workflow is orchestrated using **Docker** for easy packaging and repr
 
 The final report is visualized in a dynamic dashboard built with **Looker Studio**, available at:
 
-🔗 [View Dashboard](https://lookerstudio.google.com/reporting/45d260d1-7c90-4712-832d-ce907618e626/page/FSZQF/edit)
+🔗 [View Dashboard](https://lookerstudio.google.com/reporting/cc9bdd02-8570-4265-b29e-5aa56afdf417/page/tEnnC)
 
 ---
 
