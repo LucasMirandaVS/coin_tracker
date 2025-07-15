@@ -107,6 +107,6 @@ docker compose up --build
 ---
 
 ## Future Improvements
-- Enable logging and alerting
 - Validate schema before upload
-- Parametrize coin list or add CLI options
+- Parametrize coin list for optimization
+- Add CLI options
