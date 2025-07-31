@@ -18,6 +18,6 @@ def test_upload_to_gcs_walks_through_files(sample_crypto_df):
         mock_bucket.blob.return_value = mock_blob
         mock_storage_client.return_value.bucket.return_value = mock_bucket
 
-        upload_folder_to_gcs("data")
+        upload_folder_to_gcs("crypto_data", bucket_name="mock_bucket")
 
         mock_blob.upload_from_filename.assert_called_with("data/2024-06/bitcoin.csv")

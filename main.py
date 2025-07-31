@@ -2,7 +2,8 @@ from scripts.extract import extract_all_coins
 from scripts.validate import save_partitioned_csvs
 from scripts.upload_to_gcs import upload_folder_to_gcs
 
-BUCKET_NAME = "projeto-estudando-gcp_cloudbuild"
+# Atualizações para o novo projeto no GCP
+BUCKET_NAME = "crypto-data-tracker"
 GCS_FOLDER = "crypto_data"
 LOCAL_OUTPUT_DIR = "data"
 
