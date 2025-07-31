@@ -1,22 +1,14 @@
-# Crypto Data Pipeline
+# Crypto Data Pipeline | Crypto Coin Tracker
 
 A lightweight and containerized pipeline for collecting historical cryptocurrency data and uploading it to Google BigQuery.
 
-This project was built using **Google Cloud Platform** tools such as:
+This project is an adaptation of a real life solution presented to a client who needed to track his crypto portfolio and was built using **Google Cloud Platform** tools such as:
 
 - **Google BigQuery** for scalable data storage and analytics
 - **Cloud Storage** to stage partitioned CSVs
 - **Cloud Run Jobs** to run the pipeline in a serverless container
 - **Artifact Registry** to host the container image
 - **Cloud Scheduler** to trigger the job weekly
-- **Looker Studio** to build an interactive dashboard for data visualization
-
-The entire workflow is orchestrated using **Docker** for easy packaging and reproducibility.
-
-The final report is visualized in a dynamic dashboard built with **Looker Studio**, available at:
-
-🔗 [View Dashboard](https://lookerstudio.google.com/reporting/45d260d1-7c90-4712-832d-ce907618e626/page/FSZQF/edit)
-
 ---
 
 ## Project Structure
@@ -49,13 +41,11 @@ graph TD;
     API["CoinGecko API"]
     GCS["Cloud Storage<br>(partitioned CSVs)"]
     BigQuery["BigQuery Table<br>(external)"]
-    Looker["Looker Studio<br>(dashboard)"]
 
     Scheduler --> RunJob
     RunJob --> API
     RunJob --> GCS
     GCS --> BigQuery
-    BigQuery --> Looker
 ```
 
 ---
@@ -66,7 +56,7 @@ graph TD;
 2. Saves partitioned `.csv` files locally by year/month
 3. Uploads the partitioned files to a GCS bucket
 4. A BigQuery external table reads all CSVs from the bucket
-5. Dashboard in Looker Studio visualizes the data
+
 
 ---
 
@@ -102,11 +92,10 @@ docker compose up --build
 - **Cloud Scheduler**: Free up to 3 jobs/month
 - **Cloud Storage**: First 5 GB free, then ~$0.026/GB/month
 - **Artifact Registry**: Small cost based on usage, free tier available
-- **Looker Studio**: Free (with quotas for BigQuery usage)
 
 ---
 
 ## Future Improvements
-- Enable logging and alerting
 - Validate schema before upload
-- Parametrize coin list or add CLI options
+- Parametrize coin list for optimization
+- Add CLI options
