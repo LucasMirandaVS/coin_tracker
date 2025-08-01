@@ -1,9 +1,12 @@
-venv/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 *.db
 *.log
+*.csv
+data/
+.secrets/
 secrets/
 .env
+gcp-key.json

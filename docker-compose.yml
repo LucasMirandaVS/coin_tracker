@@ -9,5 +9,5 @@ services:
     volumes:
       - ./secrets:/app/secrets
     environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/projeto-estudando-gcp-4617dc946a75.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/gcp-key.json
     command: python main.py

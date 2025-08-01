@@ -1,18 +1,18 @@
-# Imagem base do Python
+# Imagem base enxuta com Python 3.12
 FROM python:3.12-slim
 
-# Diretório de trabalho dentro do container
+# Diretório de trabalho
 WORKDIR /app
 
-# Copia todos os arquivos do projeto para o container
+# Copia os arquivos do projeto para o container
 COPY . .
 
 # Instala as dependências
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
 
-# Define a variável de ambiente com o caminho da credencial
-ENV GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/projeto-estudando-gcp-4617dc946a75.json
+# Define o caminho para a chave de autenticação do GCP
+# ENV GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/gcp-key.json
 
-# Comando padrão para executar a aplicação Flask via main.py
+# Comando padrão
 CMD ["python", "main.py"]

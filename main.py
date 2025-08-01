@@ -1,3 +1,6 @@
+import base64
+import google.auth
+import google.auth.transport.requests
 from scripts.extract import extract_all_coins
 from scripts.validate import save_partitioned_csvs
 from scripts.upload_to_gcs import upload_folder_to_gcs
