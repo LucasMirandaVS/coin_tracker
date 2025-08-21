@@ -2,7 +2,7 @@
 
 A lightweight and containerized pipeline for collecting historical cryptocurrency data and uploading it to Google BigQuery.
 
-This project is an adaptation of a real life solution presented to a client who needed to track his crypto portfolio and was built using **Google Cloud Platform** tools such as:
+This project is an adaptation of a real-life solution that was reworked for a crypto portfolio scenario in order to highlight a fully serverless architecture on Google Cloud Platform and was built using the following tools:
 
 - **Google BigQuery** for scalable data storage and analytics
 - **Cloud Storage** to stage partitioned CSVs
